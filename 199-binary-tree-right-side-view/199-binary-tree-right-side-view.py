@@ -10,12 +10,11 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
-        
-        q = collections.deque([root])
+        q = deque([root])
         res = []
         
         while q:
-            right = None
+            right= None
             lenQ = len(q)
             
             for i in range(lenQ):
@@ -24,6 +23,8 @@ class Solution(object):
                     right = node
                     q.append(node.left)
                     q.append(node.right)
+            
             if right:
                 res.append(right.val)
+                
         return res
