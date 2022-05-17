@@ -11,20 +11,22 @@ class Solution(object):
         :rtype: List[int]
         """
         q = deque([root])
+        
         res = []
         
         while q:
-            right= None
+            right = None
             lenQ = len(q)
             
             for i in range(lenQ):
                 node = q.popleft()
+
                 if node:
-                    right = node
+                    right = node                    
                     q.append(node.left)
                     q.append(node.right)
-            
             if right:
                 res.append(right.val)
-                
         return res
+            
+                
