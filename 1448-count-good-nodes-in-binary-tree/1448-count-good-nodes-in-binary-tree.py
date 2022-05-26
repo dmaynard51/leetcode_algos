@@ -10,16 +10,19 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        
-        def dfs(node,mx):
+        res = [0]
+        def dfs(node, mx):
             if not node:
-                return 0
-            res = 1 if node.val >= mx else 0
-            mx = max(mx, node.val)
-            res += dfs(node.left, mx)
-            res += dfs(node.right, mx)
-            return res
+                return
+            
+            if node.val >= mx:
+                res[0] += 1
+                mx = node.val
+            dfs(node.left, mx)
+            dfs(node.right, mx)
         
-        return dfs(root,root.val)
-
+        dfs(root, root.val)
+        return res[0]
                 
+            
+            
