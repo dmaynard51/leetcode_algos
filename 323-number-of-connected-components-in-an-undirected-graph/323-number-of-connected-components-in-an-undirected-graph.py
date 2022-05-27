@@ -5,26 +5,36 @@ class Solution(object):
         :type edges: List[List[int]]
         :rtype: int
         """
-        adj = {i:[] for i in range(n)}
         
-        for node, nei in edges:
-            adj[node].append(nei)
-            adj[nei].append(node)
+        par = [i for i in range(n)]
+        rank = [1 for i in range(n)]
         
-        visit = set()
+        def find(n):
+            res = n
+            
+            while res != par[res]:
+                par[res] = par[par[res]]
+                res = par[res]
+            return res
         
-        def dfs(node):
-            if node in visit:
+        def union(a, b):
+            a1, b1 = find(a), find(b)
+            
+            if a1 == b1:
                 return 0
             
-            visit.add(node)
-            
-            for nei in adj[node]:
-                dfs(nei)
+            if rank[b1] > rank[a1]:
+                par[a1] = b1
+                rank[b1] += rank[a1]
+            else:
+                par[b1] = a1
+                rank[a1] += rank[b1]
             
             return 1
-        res = 0
-        for i in range((n)):
-            if i not in visit:
-                res += dfs(i)
+        
+        res = n
+        
+        for a,b in (edges):
+            res -= union(a, b)
         return res
+            
