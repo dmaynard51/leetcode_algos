@@ -12,11 +12,11 @@ class Solution(object):
         :rtype: bool
         """
         
-        def dfs(l,r):
+        def dfs(l, r):
             if not l and not r:
                 return True
-            if not l or not r or p.val != q.val:
+            if not l or not r or l.val != r.val:
                 return False
             return l.val == r.val and dfs(l.left, r.left) and dfs(l.right, r.right)
         
-        return dfs(p, q)
+        return dfs(p,q)
