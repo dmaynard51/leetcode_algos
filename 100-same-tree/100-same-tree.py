@@ -11,6 +11,7 @@ class Solution(object):
         :type q: TreeNode
         :rtype: bool
         """
+        
         def dfs(l,r):
             if not l and not r:
                 return True
