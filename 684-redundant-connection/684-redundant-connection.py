@@ -4,20 +4,18 @@ class Solution(object):
         :type edges: List[List[int]]
         :rtype: List[int]
         """
-        
         par = [i for i in range(len(edges)+1)]
         rank = [1 for i in range(len(edges)+1)]
-        
-        def find(node):
-            p = par[node]
+        def find(a):
+            p = par[a]
+            
             while p != par[p]:
                 par[p] = par[par[p]]
                 p = par[p]
-            
             return p
         
         def union(a, b):
-            a1, b1 = find(a), find(b)
+            a1,b1 = find(a), find(b)
             
             if a1 == b1:
                 return False
@@ -28,9 +26,12 @@ class Solution(object):
             else:
                 par[a1] = b1
                 rank[b1] += rank[a1]
+            
             return True
         
         for a,b in edges:
-            if not union(a, b):
-                return [a,b]
+            if not union(a,b):
+                return [a, b]
+        return []
                 
+            
