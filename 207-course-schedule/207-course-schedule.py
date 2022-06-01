@@ -5,27 +5,27 @@ class Solution(object):
         :type prerequisites: List[List[int]]
         :rtype: bool
         """
-        preReq = {i:[] for i in range(numCourses)}
-        
-        for crs, pre in prerequisites:
-            preReq[crs].append(pre)
-        
         visit = set()
         
+        adj = {i:[] for i in range(numCourses)}
+        
+        for crs, pre in prerequisites:
+            adj[crs].append(pre)
+            
         def dfs(node):
             if node in visit:
                 return False
-            if len(preReq[node]) == 0:
+            if len(adj[node]) == 0:
                 return True
             visit.add(node)
             
-            for pre in preReq[node]:
-                if not dfs(pre):
+            for nei in adj[node]:
+                if not dfs(nei):
                     return False
             visit.remove(node)
-            preReq[node] = []
+            adj[node] = []
             return True
-        
+            
         for i in range(numCourses):
             if not dfs(i):
                 return False
