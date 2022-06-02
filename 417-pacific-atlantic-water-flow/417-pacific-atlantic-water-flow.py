@@ -6,31 +6,36 @@ class Solution(object):
         """
         pac = set()
         atl = set()
+        
+        res = []
         rows = len(heights)
         columns = len(heights[0])
         
-        def dfs(r, c, st, prev):
-            if r < 0 or r >= rows or c < 0 or c >= columns or heights[r][c] < prev or (r,c) in st:
+        def dfs(i, j, st, prev):
+            if i < 0 or i >= rows or j < 0 or j >= columns or heights[i][j] < prev or (i,j) in st:
                 return
-            st.add((r,c))
-            dfs(r+1, c, st, heights[r][c])
-            dfs(r-1, c, st, heights[r][c])
-            dfs(r, c+1, st, heights[r][c])
-            dfs(r, c-1, st, heights[r][c])
+            
+            st.add((i,j))
+            dfs(i+1, j, st, heights[i][j])
+            dfs(i-1, j, st, heights[i][j])
+            dfs(i, j+1, st, heights[i][j])
+            dfs(i, j-1, st, heights[i][j])
+            
+            
+        
         
         for c in range(columns):
             dfs(0, c, pac, heights[0][c])
-            dfs(rows-1, c, atl, heights[rows-1][c])
-        
+            dfs(rows-1,c, atl, heights[rows-1][c])
+            
+            
         for r in range(rows):
             dfs(r, 0, pac, heights[r][0])
-            dfs(r, columns-1, atl, heights[r][columns-1])
-        res = []
-        
-        
+            dfs(r, columns-1, atl, heights[r][columns-1] )
+            
+        #print atl, pac
         for i in range(rows):
             for j in range(columns):
-                if (i,j) in atl and (i, j) in pac:
+                if (i,j) in pac and (i,j) in atl:
                     res.append([i,j])
         return res
-        
