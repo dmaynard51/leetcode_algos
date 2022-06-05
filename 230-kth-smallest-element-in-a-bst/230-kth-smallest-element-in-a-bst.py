@@ -11,19 +11,15 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        res = 0
-        
-        q = []
-        
         cur = root
-        
+        q = []
+        res = 0
         while cur or q:
             while cur:
                 q.append(cur)
                 cur = cur.left
             cur = q.pop()
             res += 1
-            
             if res == k:
                 return cur.val
             cur = cur.right
