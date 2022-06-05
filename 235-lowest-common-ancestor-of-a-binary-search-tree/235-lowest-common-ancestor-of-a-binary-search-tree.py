@@ -13,8 +13,6 @@ class Solution(object):
         :type q: TreeNode
         :rtype: TreeNode
         """
-        
-        
         while root:
             if root.val < p.val and root.val < q.val:
                 root = root.right
