@@ -11,23 +11,19 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        stack = []
-        n = 0
+        res = 0
+        
+        q = []
+        
         cur = root
         
-        while cur or stack:
+        while cur or q:
             while cur:
-                stack.append(cur)
+                q.append(cur)
                 cur = cur.left
+            cur = q.pop()
+            res += 1
             
-            cur = stack.pop()
-            n += 1
-            
-            if n == k:
+            if res == k:
                 return cur.val
-            
             cur = cur.right
-
-            
-            
-            
