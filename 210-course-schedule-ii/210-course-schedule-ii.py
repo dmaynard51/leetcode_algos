@@ -5,15 +5,16 @@ class Solution(object):
         :type prerequisites: List[List[int]]
         :rtype: List[int]
         """
-        res = []
+        
+        visit = set()
+        cycle = set()
         
         adj = {i:[] for i in range(numCourses)}
         
-        for crs, pre in prerequisites:
-            adj[crs].append(pre)
+        for src, dst in prerequisites:
+            adj[src].append(dst)
         
-        cycle = set()
-        visit = set()
+        res = []
         
         def dfs(node):
             if node in cycle:
@@ -26,12 +27,12 @@ class Solution(object):
                 if not dfs(nei):
                     return False
             cycle.remove(node)
-            res.append(node)
             visit.add(node)
+            res.append(node)
             return True
         
         for i in range(numCourses):
             if not dfs(i):
                 return []
         return res
-            
+        
