@@ -6,9 +6,9 @@ class Solution(object):
         """
         adj = {src:[] for src, dst in tickets}
         tickets.sort()
+        
         for src, dst in tickets:
             adj[src].append(dst)
-        
         res = ['JFK']
         
         def dfs(src):
