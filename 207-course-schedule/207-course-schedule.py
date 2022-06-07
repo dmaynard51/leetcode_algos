@@ -7,11 +7,11 @@ class Solution(object):
         """
         visit = set()
         
-        adj = {i:[] for i in range(numCourses)}
+        adj = defaultdict(list)
         
-        for crs, pre in prerequisites:
-            adj[crs].append(pre)
-            
+        for src, dst in prerequisites:
+            adj[src].append(dst)
+        
         def dfs(node):
             if node in visit:
                 return False
@@ -25,7 +25,7 @@ class Solution(object):
             visit.remove(node)
             adj[node] = []
             return True
-            
+        
         for i in range(numCourses):
             if not dfs(i):
                 return False
