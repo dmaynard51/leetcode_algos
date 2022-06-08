@@ -4,31 +4,33 @@ class Solution(object):
         :type tickets: List[List[str]]
         :rtype: List[str]
         """
-        adj = {src:[] for src,dst in tickets}
+        res = ['JFK']
+        adj = defaultdict(list)
         
         tickets.sort()
-        
         for src, dst in tickets:
             adj[src].append(dst)
-        res = ['JFK']
         
+        #print adj
         
-        def dfs(src):
-            if len(res) == len(tickets) + 1:
+        def dfs(node):
+
+            if len(res) == len(tickets)+1:
                 return True
-            if src not in adj:
-                return False
+            if node not in adj:
+                return False            
             
-            temp = list(adj[src])
+            temp = list(adj[node])
+            #print temp
             for i, dst in enumerate(temp):
-                adj[src].pop(i)
+                adj[node].pop(i)
                 res.append(dst)
                 if dfs(dst):
                     return True
-                adj[src].insert(i, dst)
+                adj[node].insert(i, dst)
                 res.pop()
+            
+            
             return False
-        
         dfs('JFK')
         return res
-        
