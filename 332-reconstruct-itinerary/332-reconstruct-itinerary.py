@@ -4,12 +4,14 @@ class Solution(object):
         :type tickets: List[List[str]]
         :rtype: List[str]
         """
-        adj = {src:[] for src, dst in tickets}
+        adj = {src:[] for src,dst in tickets}
+        
         tickets.sort()
         
         for src, dst in tickets:
             adj[src].append(dst)
         res = ['JFK']
+        
         
         def dfs(src):
             if len(res) == len(tickets) + 1:
@@ -18,14 +20,15 @@ class Solution(object):
                 return False
             
             temp = list(adj[src])
-            
-            for i, v in enumerate(temp):
+            for i, dst in enumerate(temp):
                 adj[src].pop(i)
-                res.append(v)
-                if dfs(v):
+                res.append(dst)
+                if dfs(dst):
                     return True
-                adj[src].insert(i, v)
+                adj[src].insert(i, dst)
                 res.pop()
             return False
+        
         dfs('JFK')
         return res
+        
