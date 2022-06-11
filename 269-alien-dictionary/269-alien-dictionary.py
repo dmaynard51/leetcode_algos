@@ -16,7 +16,7 @@ class Solution(object):
                 if w1[j] != w2[j]:
                     adj[w1[j]].add(w2[j])
                     break
-        
+   
         visit = {}
         res = []
         
@@ -29,6 +29,7 @@ class Solution(object):
                     return True
             visit[c] = False
             res.append(c)
+ 
         #print res
         for c in adj:
             if dfs(c):
