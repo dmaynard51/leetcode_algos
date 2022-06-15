@@ -10,21 +10,25 @@ class Solution(object):
         
         for u, v, w in times:
             adj[u].append([w, v])
-        q = [[0, k]]
         
         visit = set()
         res = 0
+        
+        q = [[0, k]]
+        res = 0
         while q:
-            w1, dst1 = heapq.heappop(q)
+            w1, v1 = heapq.heappop(q)
+            if len(visit) == n:
+                return res
             
-            if dst1 in visit:
+            if v1 in visit:
                 continue
-            visit.add(dst1)
-            res = max(w1, res)
-            for w2, dst2 in adj[dst1]:
-                if dst2 in visit:
+            res = max(res, w1)
+            visit.add(v1)
+            for w2, v2 in adj[v1]:
+                if v2 in visit:
                     continue
-                heapq.heappush(q, [w2 + w1, dst2])
+                heapq.heappush(q, [w2+w1, v2])
         if len(visit) == n:
             return res
         return -1
