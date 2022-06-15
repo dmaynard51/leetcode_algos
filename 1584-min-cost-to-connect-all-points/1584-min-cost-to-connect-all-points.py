@@ -4,36 +4,29 @@ class Solution(object):
         :type points: List[List[int]]
         :rtype: int
         """
-        adj = {i:[] for i in range(len(points))}
-        
-        for i in range(len(points)):
+
+        n, c = len(points), collections.defaultdict(list)
+        for i in range(n):
             x1, y1 = points[i]
-            for j in range(i+1, len(points)):
+            for j in range(i+1, n):
                 x2, y2 = points[j]
-                dist = abs(x1-x2) + abs(y1-y2)
-                adj[i].append([dist,j])
-                adj[j].append([dist, i])
+                d = abs(x1-x2) + abs(y1-y2)
+                c[i].append([d, j])
+                c[j].append([d, i])
+        cnt, ans, visited, heap = 1, 0, [0] * n, c[0]
+        
+        visited[0] = 1
+        heapq.heapify(heap)
         visit = set()
         visit.add(0)
-        res = 0
-        q = adj[0]                      
-        heapq.heapify(q)
-        
-        cnt = 1
-        while q:
-            cost, src = heapq.heappop(q)
-            if src not in visit:
-                res += cost
-                visit.add(src)
-
-                for cost2, src2 in adj[src]:
-                    if src2 not in visit:
-                        heapq.heappush(q, [cost2, src2])
-            if cnt >= len(points):
-                break
-        return res
-            
-                             
-                              
-                              
-                    
+        while heap:
+            d, j = heapq.heappop(heap)
+            if j not in visit:
+                cnt, ans = cnt+1, ans+d
+                visit.add(j)
+                for cost, dst in c[j]: 
+                    #print cost,dst
+                    if dst not in visit:
+                        heapq.heappush(heap, [cost, dst])
+            if len(visit) >= n: break        
+        return ans
