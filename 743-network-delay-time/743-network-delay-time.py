@@ -6,27 +6,25 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        
         adj = defaultdict(list)
         
-        visit = set()
-        
-        for src, dst, cost in times:
-            adj[src].append([cost, dst])
+        for u, v, w in times:
+            adj[u].append([w, v])
         q = [[0, k]]
+        
+        visit = set()
         res = 0
-
         while q:
-            c1, src1 = heapq.heappop(q)
-            if src1 in visit:
+            w1, dst1 = heapq.heappop(q)
+            
+            if dst1 in visit:
                 continue
-            visit.add(src1)
-            res = max(res, c1)
-            for c2, src2 in adj[src1]:
-                if src2 in visit:
+            visit.add(dst1)
+            res = max(w1, res)
+            for w2, dst2 in adj[dst1]:
+                if dst2 in visit:
                     continue
-                heapq.heappush(q, [c2 + c1, src2])
+                heapq.heappush(q, [w2 + w1, dst2])
         if len(visit) == n:
             return res
         return -1
-        
