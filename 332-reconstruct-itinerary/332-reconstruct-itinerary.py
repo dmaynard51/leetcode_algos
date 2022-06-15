@@ -6,31 +6,26 @@ class Solution(object):
         """
         res = ['JFK']
         adj = defaultdict(list)
-        
         tickets.sort()
-        for src, dst in tickets:
-            adj[src].append(dst)
+        for src, nei in tickets:
+            adj[src].append(nei)
         
-        #print adj
         
         def dfs(node):
-
-            if len(res) == len(tickets)+1:
+            if len(res) == len(tickets) + 1:
                 return True
             if node not in adj:
-                return False            
+                return False
             
             temp = list(adj[node])
-            #print temp
-            for i, dst in enumerate(temp):
+            
+            for i, nei in enumerate(temp):
+                res.append(nei)
                 adj[node].pop(i)
-                res.append(dst)
-                if dfs(dst):
+                if dfs(nei):
                     return True
-                adj[node].insert(i, dst)
                 res.pop()
-            
-            
+                adj[node].insert(i, nei)
             return False
         dfs('JFK')
         return res
