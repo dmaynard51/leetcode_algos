@@ -21,6 +21,8 @@ class Solution(object):
         visit.add(0)
         while heap:
             d, j = heapq.heappop(heap)
+            if len(visit) >= n:
+                break
             if j not in visit:
                 cnt, ans = cnt+1, ans+d
                 visit.add(j)
@@ -28,5 +30,5 @@ class Solution(object):
                     #print cost,dst
                     if dst not in visit:
                         heapq.heappush(heap, [cost, dst])
-            if len(visit) >= n: break        
+       
         return ans
