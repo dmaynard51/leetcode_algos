@@ -8,17 +8,19 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
+        
         prices = [float('inf') for i in range(n)]
         prices[src] = 0
-        
         for i in range(k+1):
             temp = prices[:]
-            for s, d, p in flights:
+            
+            for s, d, c in flights:
                 if prices[s] == float('inf'):
                     continue
-                if prices[s] + p < temp[d]:
-                    temp[d] = prices[s] + p
+                if prices[s] + c < temp[d]:
+                    temp[d] = prices[s] + c
             prices = temp
-        if prices[dst] != float('inf'):
-            return prices[dst]
-        return -1
+        
+        if prices[dst] == float('inf'):
+            return -1
+        return prices[dst]
