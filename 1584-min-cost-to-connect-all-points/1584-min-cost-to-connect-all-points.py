@@ -4,32 +4,36 @@ class Solution(object):
         :type points: List[List[int]]
         :rtype: int
         """
-
-        n, c = len(points), collections.defaultdict(list)
-        for i in range(n):
-            x1, y1 = points[i]
-            for j in range(i+1, n):
-                x2, y2 = points[j]
-                d = abs(x1-x2) + abs(y1-y2)
-                c[i].append([d, j])
-                c[j].append([d, i])
-        cnt, ans, visited, heap = 1, 0, [0] * n, c[0]
+        adj = {i:[] for i in range(len(points))}
         
-        visited[0] = 1
-        heapq.heapify(heap)
+        for i in range(len(points)):
+            x1, y1 = points[i]
+            for j in range(i+1, len(points)):
+                x2, y2 = points[j]
+                dist = abs(x1-x2) + abs(y1-y2)
+                adj[i].append([dist,j])
+                adj[j].append([dist, i])
         visit = set()
-        visit.add(0)
-        while heap:
-            d, j = heapq.heappop(heap)
-            if len(visit) >= n:
+        res = 0
+                              
+        q = [[0,0]]
+        
+        while q:
+            cost, src = heapq.heappop(q)
+            if len(visit) >= len(points):
                 break
-            if j in visit:
+            if src in visit:
                 continue
-            cnt, ans = cnt+1, ans+d
-            visit.add(j)
-            for cost, dst in c[j]: 
-                #print cost,dst
-                if dst not in visit:
-                    heapq.heappush(heap, [cost, dst])
-       
-        return ans
+            res += cost
+            visit.add(src)
+            
+            for cost2, src2 in adj[src]:
+                if src2 in visit:
+                    continue
+                heapq.heappush(q, [cost2, src2])
+        return res
+            
+                             
+                              
+                              
+                    
