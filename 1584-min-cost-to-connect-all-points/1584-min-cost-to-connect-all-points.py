@@ -23,6 +23,8 @@ class Solution(object):
             if j not in visit:
                 cnt, ans = cnt+1, ans+d
                 visit.add(j)
-                for record in c[j]: heapq.heappush(heap, record)
+                for cost, dst in c[j]: 
+                    #print cost,dst
+                    heapq.heappush(heap, (cost, dst))
             if cnt >= n: break        
         return ans
