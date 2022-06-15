@@ -11,8 +11,8 @@ class Solution(object):
             for j in range(i+1, n):
                 x2, y2 = points[j]
                 d = abs(x1-x2) + abs(y1-y2)
-                c[i].append((d, j))
-                c[j].append((d, i))
+                c[i].append([d, j])
+                c[j].append([d, i])
         cnt, ans, visited, heap = 1, 0, [0] * n, c[0]
         visited[0] = 1
         heapq.heapify(heap)
@@ -25,6 +25,6 @@ class Solution(object):
                 visit.add(j)
                 for cost, dst in c[j]: 
                     #print cost,dst
-                    heapq.heappush(heap, (cost, dst))
+                    heapq.heappush(heap, [cost, dst])
             if cnt >= n: break        
         return ans
