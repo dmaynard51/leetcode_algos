@@ -13,7 +13,6 @@ class Solution(object):
         q = deque([root])
         
         res = []
-        
         while q:
             right = None
             lenQ = len(q)
@@ -21,12 +20,16 @@ class Solution(object):
             for i in range(lenQ):
                 node = q.popleft()
 
+                
                 if node:
-                    right = node                    
+                    right = node
                     q.append(node.left)
                     q.append(node.right)
             if right:
+                #print node.val
                 res.append(right.val)
+            
         return res
             
-                
+        
+        
