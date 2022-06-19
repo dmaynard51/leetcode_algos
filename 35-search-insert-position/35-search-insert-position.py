@@ -13,5 +13,5 @@ class Solution(object):
             if nums[m] >= target:
                 r = m
             else:
-                l = m + 1
+                l += 1
         return l
