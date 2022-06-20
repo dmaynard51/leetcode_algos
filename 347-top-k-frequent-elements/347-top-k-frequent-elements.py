@@ -5,20 +5,15 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
-        
         dct = collections.Counter(nums)
+        res = []
+        lst = [[] for i in range(len(nums)+1)]
         
-        res = [[] for i in range(len(nums)+1)]
-
-        res2 = []
-        for n, c in dct.items():
-            res[c].append(n)
-
-        for i in range(len(res)-1, -1, -1):
-            bucket = res[i]
-            res2 += bucket
-            if len(res2) == k:
-                return res2
+        for key, num in dct.items():
+            lst[num].append(key)
+        #print lst
         
-        
-        
+        for i in range(len(lst)-1, -1, -1):
+            res += lst[i]
+            if len(res) == k:
+                return res
