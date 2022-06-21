@@ -11,7 +11,7 @@ class Solution(object):
             if sm == target:
                 res.append(cur[:])
                 return
-            if sm > target or i >= len(candidates):
+            if i >= len(candidates) or sm > target:
                 return
             cur.append(candidates[i])
             dfs(i, sm + candidates[i], cur)
@@ -19,4 +19,3 @@ class Solution(object):
             dfs(i+1, sm, cur)
         dfs(0, 0, [])
         return res
-            
