@@ -6,7 +6,7 @@ class Solution(object):
         """
         self.res = []
         
-        def dfs(i, cur):
+        def dfs(i,cur):
             if i >= len(nums):
                 self.res.append(cur[:])
                 return
@@ -14,5 +14,6 @@ class Solution(object):
             dfs(i+1, cur)
             cur.pop()
             dfs(i+1, cur)
+            return
         dfs(0, [])
         return self.res
