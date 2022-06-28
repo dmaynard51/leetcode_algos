@@ -5,27 +5,24 @@ class Solution(object):
         :rtype: List[str]
         """
         res = ['JFK']
-        adj = defaultdict(list)
         tickets.sort()
-        for src, nei in tickets:
-            adj[src].append(nei)
+        visit = set()
+        adj = defaultdict(list)
         
-        
-        def dfs(node):
+        for src, dst in tickets:
+            adj[src].append(dst)
+        def dfs(src):
             if len(res) == len(tickets) + 1:
                 return True
-            if node not in adj:
-                return False
             
-            temp = list(adj[node])
-            
+            temp = list(adj[src])
             for i, nei in enumerate(temp):
+                adj[src].pop(i)
                 res.append(nei)
-                adj[node].pop(i)
                 if dfs(nei):
                     return True
                 res.pop()
-                adj[node].insert(i, nei)
+                adj[src].insert(i, nei)
             return False
         dfs('JFK')
         return res
