@@ -6,27 +6,30 @@ class Solution(object):
         :rtype: bool
         """
         visit = set()
+        cycle = set()
         
         adj = defaultdict(list)
-        
         for src, dst in prerequisites:
             adj[src].append(dst)
         
         def dfs(node):
-            if node in visit:
+            if node in cycle:
                 return False
-            if len(adj[node]) == 0:
+            if node in visit:
                 return True
-            visit.add(node)
+            cycle.add(node)
             
             for nei in adj[node]:
                 if not dfs(nei):
                     return False
-            visit.remove(node)
-            adj[node] = []
+            
+            visit.add(node)
+            cycle.remove(node)
             return True
         
-        for i in range(numCourses):
+        for i in range((numCourses)):
             if not dfs(i):
                 return False
-        return True
+        #print len(visit)
+        if len(visit) == (numCourses):
+            return True
