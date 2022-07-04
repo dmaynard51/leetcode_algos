@@ -4,17 +4,18 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        dp = [0 for i in range(n+1)]
         
-        if n <= 1:
+        
+        j1 = 1
+        j2 = 2
+        
+        if n <= 2:
             return n
-
-        dp[0] = 0
-        dp[1] = 1
-        dp[2] = 2
+        # 1, 2, 3, 4, 5, 6
+        # 1, 2, 3, 5, 8, 13
         
-        for i in range(3, n+1):
-            dp[i] = dp[i-1] + dp[i-2]
-        return dp[-1]
-        
-        
+        for i in range(2, n):
+            temp = (j1 + j2)
+            j1 = j2
+            j2 = temp
+        return j2
