@@ -11,32 +11,26 @@ class BSTIterator(object):
         :type root: TreeNode
         """
         self.lst = []
-        
-        node = root
-        
-        self.creation(root)
-    
-    def creation(self, node):
+        self.create(root)
+
+    def create(self, node):
         while node is not None:
             self.lst.append(node)
             node = node.left
+            
     def next(self):
         """
         :rtype: int
         """
         node = self.lst.pop()
-        
-        self.creation(node.right)
+        self.create(node.right)
         return node.val
-            
-        
 
     def hasNext(self):
         """
         :rtype: bool
         """
         return self.lst
-        
 
 
 # Your BSTIterator object will be instantiated and called as such:
