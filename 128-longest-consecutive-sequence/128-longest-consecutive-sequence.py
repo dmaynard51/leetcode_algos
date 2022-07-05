@@ -4,14 +4,16 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        
         temp = set(nums)
         res = 0
         for i in nums:
             if (i - 1) not in temp:
-                length = 0
-                while (i + length) in temp:
-                    length += 1
-                res = max(res, length)
+                count = 0
                 
-        return res
+                while (i + count) in temp:
+                    
+                    count += 1
+                res = max(res, count)
             
+        return res
