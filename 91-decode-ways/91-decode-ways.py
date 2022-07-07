@@ -4,20 +4,17 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        if s[0] == '0':
-            return 0
-        dp = [0 for i in range(len(s) + 1)]
-        dp[0] = 1
-        dp[1] = 1
+        dp = {len(s): 1}
         
-        #dp = [0, 1, 2]
-        #01234
-        #11106
-        #112221
-        
-        for i in range(2,len(dp)):
-            if 1 <= int(s[i-1:i]) <= 9:
-                dp[i] += dp[i-1]
-            if 10 <= int(s[i-2:i]) <= 26:
-                dp[i] += dp[i-2]
-        return dp[-1]
+        def dfs(i):
+            if i in dp:
+                return dp[i]
+            if s[i] == '0':
+                return 0
+            res = dfs(i+1)
+            if (i + 1 < len(s) and (s[i] == '1' or s[i] == '2' and s[i+1] in "0123456")):
+                res += dfs(i+2)
+            dp[i] = res
+            return dp[i]
+        return dfs(0)
+                
