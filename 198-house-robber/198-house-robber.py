@@ -4,10 +4,10 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        rob1, rob2 = 0, 0
         
-        dp = [0 for i in range(len(nums) + 1)]
-        dp[1] = nums[0]
-        
-        for i in range(1, len(nums)):
-            dp[i + 1] = max(dp[i], nums[i] + dp[i-1])
-        return dp[-1]
+        for i in nums:
+            temp = max(i + rob1, rob2)
+            rob1 = rob2
+            rob2 = temp
+        return rob2
