@@ -12,7 +12,6 @@ class Solution(object):
                 rob1 = rob2
                 rob2 = temp
             return rob2
-        if len(nums) <= 2:
-            return max(nums)
-        
+        if len(nums) <= 1:
+            return nums[-1]
         return max(dfs(nums[1:]), dfs(nums[:-1]))
