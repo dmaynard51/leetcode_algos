@@ -9,7 +9,6 @@ class Solution(object):
         
         for src, dst in prerequisites:
             adj[src].append(dst)
-        
         visit = set()
         cycle = set()
         def dfs(node):
@@ -17,6 +16,7 @@ class Solution(object):
                 return False
             if node in visit:
                 return True
+            
             cycle.add(node)
             
             for nei in adj[node]:
@@ -33,4 +33,3 @@ class Solution(object):
         
         if len(visit) == numCourses:
             return True
-        return False
