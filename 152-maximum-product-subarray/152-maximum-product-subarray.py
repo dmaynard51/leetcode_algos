@@ -4,14 +4,16 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        curMax, curMin = 1, 1
         res = max(nums)
+        
+        maxNum, minNum = 1, 1
+        
         for i in nums:
             if i == 0:
-                curMax, curMin = 1, 1
+                maxNum, minNum = 1, 1
                 continue
-            temp = i * curMax
-            curMax = max(i * curMax, i * curMin, i)
-            curMin = min(temp, i * curMin, i)
-            res = max(res, curMax)
+            temp = i * maxNum
+            maxNum = max(i * maxNum, i * minNum, i)
+            minNum = min(temp, i * minNum, i)
+            res = max(res, maxNum)
         return res
