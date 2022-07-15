@@ -6,16 +6,16 @@ class Solution(object):
         :type website: List[str]
         :rtype: List[str]
         """
-
-        users = defaultdict(list)
-        for user, time, site in sorted(zip(username, timestamp, website), key = lambda x: (x[0],x[1])):    
-            users[user].append(site)     # defaultdicts simplify and optimize code     
+        u = defaultdict(list)
+        for user, time, web in sorted(zip(username, timestamp, website),key = lambda x: (x[0],x[1])):
+            u[user].append(web)
+            
+        counter = collections.Counter()
         
-        patterns = collections.Counter()
-
-        for users, sites in users.items():
-            patterns.update(Counter(set(combinations(sites, 3))))
+        for user, website in u.items():
+            counter.update(Counter(set(combinations(website, 3))))
+        #print counter
         
-        #print patterns
-        return max(sorted(patterns), key=patterns.get)
-        
+        return max(sorted(counter), key=counter.get)
+                           
+                           
