@@ -12,10 +12,12 @@ class Solution(object):
             
         counter = collections.Counter()
         
+        mx = ""
         for user, website in u.items():
             counter.update(Counter(set(combinations(website, 3))))
         #print counter
         
-        return max(sorted(counter), key=counter.get)
-                           
+        
+        
+        return max(sorted(counter), key = counter.get)                   
                            
