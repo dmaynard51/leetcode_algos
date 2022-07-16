@@ -7,7 +7,7 @@ class Solution(object):
         :rtype: List[str]
         """
         u = defaultdict(list)
-        for user, time, web in sorted(zip(username, timestamp, website),key = lambda x: (x[0],x[1])):
+        for user, time, web in sorted(zip(username, timestamp, website)):
             u[user].append(web)
             
         counter = collections.Counter()
