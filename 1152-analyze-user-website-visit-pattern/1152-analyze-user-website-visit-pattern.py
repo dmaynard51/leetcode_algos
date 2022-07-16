@@ -6,18 +6,14 @@ class Solution(object):
         :type website: List[str]
         :rtype: List[str]
         """
-        u = defaultdict(list)
+        users = defaultdict(list)
+        
         for user, time, web in sorted(zip(username, timestamp, website)):
-            u[user].append(web)
+            users[user].append(web)
             
         counter = collections.Counter()
         
-        mx = ""
-        for user, website in u.items():
+        for user, website in users.items():
             counter.update(Counter(set(combinations(website, 3))))
-        #print counter
         
-        
-        
-        return max(sorted(counter), key = counter.get)                   
-                           
+        return max(sorted(counter), key = counter.get)
