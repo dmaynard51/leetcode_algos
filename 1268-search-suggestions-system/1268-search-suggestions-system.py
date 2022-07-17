@@ -5,28 +5,28 @@ class Solution(object):
         :type searchWord: str
         :rtype: List[List[str]]
         """
-        class TrieNode:
+        
+        class TrieNode():
             def __init__(self):
-                self.children = collections.defaultdict(TrieNode)
-                self.suggestion = []
-            def add_suggestion(self, product):
-                if len(self.suggestion) < 3:
-                    self.suggestion.append(product)
-        
-        products.sort()
-        root = TrieNode()
-        
-        for word in products:
-            node = root
-            for c in word:
-                node = node.children[c]
-                node.add_suggestion(word)
-        
-        res = []
-        node = root
-        
-        for char in searchWord:
-            node = node.children[char]
-            res.append(node.suggestion)
-        return res
+                self.neighbors = defaultdict(TrieNode)
+                self.suggestions = []
             
+            def addSuggestion(self, suggestion):
+                if len(self.suggestions) < 3:
+                    self.suggestions.append(suggestion)
+        
+        root = TrieNode()
+        products.sort()
+        for word in products:
+            curr = root
+            for c in word:
+                curr = curr.neighbors[c]
+                curr.addSuggestion(word)
+        
+        curr = root
+        res = []
+        for c in searchWord:
+            curr = curr.neighbors[c]
+            res.append(curr.suggestions)
+        
+        return res
