@@ -4,20 +4,14 @@ class Solution(object):
         :type logs: List[str]
         :rtype: List[str]
         """
-        #for word in array.split()[1:]:
-        numbers = []
         letters = []
-        nums = "123456789"
+        digits = []
         
-        for log in logs:
-            if log.split()[1].isdigit():
-                numbers.append(log)
+        for i in logs:
+            if i.split()[1].isdigit():
+                digits.append(i)
             else:
-                letters.append(log)
-
-        letters.sort(key = lambda x: x.split()[0])            #when suffix is tie, sort by identifier
-        letters.sort(key = lambda x: x.split()[1:])
-        #letters.sort(key = lambda x: x.split()[1:])             #sort by suffix
-        #print letters
-        result = letters + numbers
-        return result
+                letters.append(i)
+        
+        letters.sort(key = lambda i: (i.split()[1:], i.split()[0] ))
+        return letters + digits
