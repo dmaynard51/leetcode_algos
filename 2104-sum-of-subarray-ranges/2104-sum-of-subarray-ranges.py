@@ -5,10 +5,11 @@ class Solution(object):
         :rtype: int
         """
         res = 0
+
         for i in range(len(nums)):
-            l, h = nums[i], nums[i]
+            mn,mx = nums[i], nums[i]
             for j in range(i, len(nums)):
-                l = min(l, nums[j])
-                h = max(h, nums[j])
-                res += (h-l)
+                mn = min(mn, nums[j])
+                mx = max(mx, nums[j])
+                res += (mx -mn)
         return res
