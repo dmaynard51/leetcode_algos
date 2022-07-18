@@ -5,13 +5,14 @@ class Solution(object):
         :rtype: int
         """
         A = [0] + arr
+        res = [0] * len(A)
         stack = [0]
-        res = [0 for i in range(len(A))]
-
+        #print A
         for i in range(len(A)):
             while A[stack[-1]] > A[i]:
                 stack.pop()
             j = stack[-1]
-            res[i] = res[j] + (i-j) * A[i]
+            res[i] = res[j] + (i-j)*A[i]
             stack.append(i)
-        return sum(res) % (10**9 + 7)
+        return sum(res) % (10**9+7)
+            
