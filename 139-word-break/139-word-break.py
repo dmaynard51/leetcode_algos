@@ -6,22 +6,21 @@ class Solution(object):
         :rtype: bool
         """
         
+        st = set(wordDict)
+        
+        
+        
+
+        
         dp = [0 for i in range(len(s)+1)]
         
+        
         dp[0] = 1
-        #leetcode
-        #1000
-        #012345678
-        #1000  
-        for i in range(1, len(dp)):
-            for w in wordDict:
-                n = len(w)
-                #print s[i-n:i]
-                if i >= n  and w == s[i - n:i] and dp[i-n]:
+        for i in range(len(dp)):
+            for j in range(i):
+                #print s[j:i]
+                if dp[j] and s[j:i] in st:
                     
-                    dp[i] = max(dp[i], dp[i-n] + 1)
+                    dp[i] = max(dp[i], dp[j] + 1)
         #print dp
         return dp[-1]
-                    
-                
-        
