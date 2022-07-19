@@ -6,11 +6,9 @@ class Solution(object):
         """
         dp = [1 for i in range(len(nums))]
         res = 1
-        
-        for i in range(len(nums)):
+        for i in range(1, len(dp)):
             for j in range(0, i):
-                if nums[i] > nums[j]:
-                    dp[i] = max(dp[i], dp[j]+1)
-                    res = max(res, dp[i])
-        #print dp
+                if nums[j] < nums[i]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+                    res = max(dp[i], res)
         return res
