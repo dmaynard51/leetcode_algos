@@ -1,8 +1,8 @@
 class MinStack(object):
 
     def __init__(self):
-        self.min = []
         self.arr = []
+        self.min = []
 
     def push(self, val):
         """
@@ -10,19 +10,17 @@ class MinStack(object):
         :rtype: None
         """
         self.arr.append(val)
-        if not self.min:
-            self.min.append(val)
-        else:
+        if len(self.min):
             self.min.append(min(val, self.min[-1]))
-        
+        else:
+            self.min.append(val)
 
     def pop(self):
         """
         :rtype: None
         """
-        self.arr.pop()
         self.min.pop()
-        
+        self.arr.pop()
 
     def top(self):
         """
