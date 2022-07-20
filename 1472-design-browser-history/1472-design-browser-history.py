@@ -36,8 +36,8 @@ class BrowserHistory(object):
         """
         while steps and self.future:
             steps -= 1
-            self.history.append(self.future[-1])
-            self.future.pop()
+            self.history.append(self.future.pop())
+            #self.future.pop()
         return self.history[-1]        
 
 
