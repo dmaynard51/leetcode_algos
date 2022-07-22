@@ -4,13 +4,11 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        index = {c: [-1, -1] for c in ascii_uppercase}
-        res = 0
-        for i, c in enumerate(S):
-            k, j = index[c]
-            res += (i - j) * (j - k)
-            index[c] = [j, i]
-        for c in index:
-            k, j = index[c]
-            res += (len(S) - j) * (j - k)
-        return res % (10**9 + 7)
+        res=[0]*(len(S)+1)
+        idxs=[[-1,-1]]*26
+        for i,c in enumerate(S):
+            code=ord(c)-ord('A')
+            first,second=idxs[code]
+            res[i+1]=1+res[i]+(i-1-second)-(second-first)
+            idxs[code]=[second,i]
+        return sum(res)%(10**9+7)
