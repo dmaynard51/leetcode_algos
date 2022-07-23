@@ -12,4 +12,4 @@ class Solution(object):
             first, second = idx[code]
             res[i+1] = 1 + res[i] + (i - 1 - second) - (second - first)
             idx[code] = [second, i]
-        return sum(res) % (2**30)
+        return sum(res) % (2**32-1)
