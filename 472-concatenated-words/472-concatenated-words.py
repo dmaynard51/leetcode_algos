@@ -6,18 +6,22 @@ class Solution(object):
         """
         def check(word, wordDict):
             if not wordDict:
-                return False
+                return 0
+            
             dp = [0 for i in range(len(word)+1)]
             dp[0] = 1
             for i in range(len(dp)):
                 for j in range(i):
                     if dp[j] and word[j:i] in wordDict:
-                        dp[i] = max(dp[i], dp[j] + 1)
+                        dp[i] = max(dp[i], dp[j]+1)
+            #print dp
             return dp[-1]
         
-        words.sort(key = len)
         pre = set()
+        
+        words.sort(key = len)
         res = []
+        
         for word in words:
             if check(word, pre):
                 res.append(word)
