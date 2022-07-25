@@ -4,8 +4,8 @@ class Solution(object):
         :type instructions: str
         :rtype: bool
         """
-        x, y = 0, 0
         dx, dy = 0, 1
+        x, y = 0, 0
         
         for i in instructions:
             if i == 'L':
@@ -14,4 +14,4 @@ class Solution(object):
                 dx, dy = dy, -dx
             elif i == 'G':
                 x, y = (x + dx), (y + dy)
-        return (x,y) == (0, 0) or (dx, dy) != (0, 1)
+        return (x, y) == (0, 0) or (dx, dy) != (0, 1)
