@@ -4,20 +4,23 @@ class Solution(object):
         :type height: List[int]
         :rtype: int
         """
-        res = 0
-        
         l = 0
         r = len(height)-1
-        leftMost = height[l]
-        rightMost = height[r]
         
+        highestL = height[l]
+        highestR = height[r]
+        res = 0
         while l < r:
-            if leftMost < rightMost:
-                l += 1
-                leftMost = max(leftMost, height[l])
-                res += leftMost - height[l]
-            else:
+            if highestR < highestL:
                 r -= 1
-                rightMost = max(rightMost, height[r])
-                res += rightMost - height[r]
+                highestR = max(highestR, height[r])
+                res += (highestR - height[r])
+            else:
+                l += 1
+                highestL = max(highestL, height[l])
+                res += (highestL - height[l])
+            #print res, l, r
         return res
+                
+            
+        
