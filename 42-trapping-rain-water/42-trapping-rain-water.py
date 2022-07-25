@@ -6,21 +6,16 @@ class Solution(object):
         """
         l = 0
         r = len(height)-1
-        
-        highestL = height[l]
-        highestR = height[r]
+        leftMost = height[l]
+        rightMost = height[r]
         res = 0
         while l < r:
-            if highestR < highestL:
-                r -= 1
-                highestR = max(highestR, height[r])
-                res += (highestR - height[r])
+            if leftMost < rightMost:
+                l +=1
+                leftMost = max(leftMost, height[l])
+                res += (leftMost - height[l])
             else:
-                l += 1
-                highestL = max(highestL, height[l])
-                res += (highestL - height[l])
-            #print res, l, r
+                r -= 1
+                rightMost = max(rightMost, height[r])
+                res += (rightMost - height[r])
         return res
-                
-            
-        
