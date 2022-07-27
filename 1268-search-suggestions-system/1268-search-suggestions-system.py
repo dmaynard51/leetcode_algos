@@ -10,23 +10,26 @@ class Solution(object):
             def __init__(self):
                 self.neighbors = defaultdict(TrieNode)
                 self.suggestions = []
-            
-            def addSuggestion(self, suggestion):
+
+            def addSuggestion(self,suggestion):
                 if len(self.suggestions) < 3:
                     self.suggestions.append(suggestion)
         
         root = TrieNode()
+        
         products.sort()
+        curr = root
         for word in products:
             curr = root
             for c in word:
                 curr = curr.neighbors[c]
                 curr.addSuggestion(word)
         
-        curr = root
         res = []
+        curr = root
         for c in searchWord:
             curr = curr.neighbors[c]
             res.append(curr.suggestions)
         
         return res
+                
