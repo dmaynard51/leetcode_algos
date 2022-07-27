@@ -6,15 +6,13 @@ class Solution(object):
         """
         def check(word, wordDict):
             if not wordDict:
-                return 0
-            
+                return False
             dp = [0 for i in range(len(word)+1)]
             dp[0] = 1
             for i in range(len(dp)):
                 for j in range(i):
                     if dp[j] and word[j:i] in wordDict:
-                        dp[i] = max(dp[i], dp[j]+1)
-            #print dp
+                        dp[i] = max(dp[i], dp[j] + 1)
             return dp[-1]
         
         pre = set()
