@@ -4,28 +4,22 @@ class Solution(object):
         :type intervals: List[List[int]]
         :rtype: int
         """
-        start = []
-        end = []
+        start, end = [], []
         
         for s, e in intervals:
             start.append(s)
             end.append(e)
-        
         start.sort()
         end.sort()
         
         s, e = 0, 0
-        
-        #0,5,15
-        #10,20,30
-        res = 0
-        count = 0
-        while s < len(end):
+        count,res = 0, 0
+        while s < len(intervals):
             if start[s] < end[e]:
-                s+= 1
                 count += 1
+                s += 1
             else:
-                e+= 1
-                count -= 1
-            res = max(res, count)
+                count -=1
+                e += 1
+            res = max(count, res)
         return res
