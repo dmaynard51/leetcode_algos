@@ -12,8 +12,6 @@ class Solution(object):
                 digits.append(i)
             else:
                 letters.append(i)
-        #print digits, letters
-        letters.sort(key = lambda i: (i.split()[1:], i.split()[0] ))
-        letters.sort(key = lambda i: (i.split()[1:]))
+        #print letters
+        letters.sort(key = lambda i: (i.split()[1:], i.split()[0]))
         return letters + digits
-        #letters.sort(key = lambda i: (i.split()[1:], i.split()[0] ))
