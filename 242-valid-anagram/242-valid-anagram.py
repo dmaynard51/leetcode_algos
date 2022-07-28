@@ -6,7 +6,13 @@ class Solution(object):
         :rtype: bool
         """
         
+        if len(s) != len(t):
+            return False
+        ss = collections.Counter(s)
+        tt = collections.Counter(t)
         
-        s = sorted(''.join(s))
-        t = sorted(''.join(t))
-        return s == t
+        for key, val in ss.items():
+            if tt[key] != val:
+                return False
+        return True
+        
