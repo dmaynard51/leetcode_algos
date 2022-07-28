@@ -5,7 +5,8 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        ss = collections.Counter(s)
-        tt = collections.Counter(t)
         
-        return ss == tt
+        
+        s = sorted(''.join(s))
+        t = sorted(''.join(t))
+        return s == t
