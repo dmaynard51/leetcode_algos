@@ -15,16 +15,14 @@ class Solution(object):
         while stack:
             lenQ = len(stack)
             right = None
-            for node in range(lenQ):
-                temp = stack.popleft()
-                if temp:
-                    right = temp
+            for i in range(lenQ):
+                node = stack.popleft()
+                #right = None
                 #print right
-                if right:
-                    if right.left:
-                        stack.append(right.left)
-                    if right.right:
-                        stack.append(right.right)
+                if node:
+                    right = node
+                    stack.append(right.left)
+                    stack.append(right.right)
             
             if right:
                 #print right.val
