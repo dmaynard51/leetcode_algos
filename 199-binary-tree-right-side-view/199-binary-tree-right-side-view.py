@@ -10,21 +10,24 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
-        q = deque([root])
+        stack = deque([root])
         res = []
-        while q:
-            lenQ = len(q)
+        while stack:
+            lenQ = len(stack)
             right = None
-            for i in range(lenQ):
-                node = q.popleft()
-                
-                if node:
-                    right = node
-                    q.append(node.left)
-                    q.append(node.right)
-            if right:        
+            for node in range(lenQ):
+                temp = stack.popleft()
+                if temp:
+                    right = temp
+                #print right
+                if right:
+                    if right.left:
+                        stack.append(right.left)
+                    if right.right:
+                        stack.append(right.right)
+            
+            if right:
+                #print right.val
                 res.append(right.val)
         return res
                 
-            
-            
