@@ -16,4 +16,5 @@ class Solution(object):
             elif truckSize < numBoxes:
                 res += (truckSize * unitsPer)
                 truckSize -= truckSize
+                break
         return res
