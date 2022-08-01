@@ -5,18 +5,15 @@ class Solution(object):
         :type truckSize: int
         :rtype: int
         """
-        boxTypes.sort(key = lambda i: i[1], reverse = True)
-        
+        boxTypes.sort(key = lambda i: (i[1]), reverse = True)
         
         res = 0
         
-        for boxNum, units in boxTypes:
-            if truckSize >= boxNum:
-                res += boxNum * units
-                truckSize -= boxNum
-            else:
-                res += (truckSize) * units
+        for numBoxes, unitsPer in boxTypes:
+            if truckSize >= numBoxes:
+                res += (numBoxes * unitsPer)
+                truckSize -= numBoxes
+            elif truckSize < numBoxes:
+                res += (truckSize * unitsPer)
                 truckSize -= truckSize
-                break
         return res
-        
