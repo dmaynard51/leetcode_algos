@@ -25,14 +25,14 @@ class Solution(object):
                 
                 if word == endWord:
                     return res
-                visit.add(word)
+
                 for i in range(len(word)):
                     temp = word[:i] + '*' + word[i+1:]
                     
                     for w in adj[temp]:
-                        if w in visit:
-                            continue
-                        q.append(w)
+                        if w not in visit:
+                            visit.add(w)
+                            q.append(w)
             res += 1
         return 0
                 
