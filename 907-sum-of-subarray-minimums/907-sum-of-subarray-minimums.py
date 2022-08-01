@@ -15,9 +15,6 @@ class Solution(object):
             while A[stack[-1]] > A[i]:
                 stack.pop()
             j = stack[-1]
-            dp[i] = dp[j] + (i-j)*A[i]
+            dp[i] = dp[j] + (i-j) * A[i]
             stack.append(i)
-        #print dp
-        return sum(dp) % (10**9+7)
-                
-                
+        return sum(dp) % (10**9 + 7)
