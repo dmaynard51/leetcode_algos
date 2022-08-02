@@ -12,13 +12,13 @@ class Solution(object):
         """
         res = [root.val]
         
-        def dfs(node):
-            if not node:
+        def dfs(root):
+            if not root:
                 return 0
-            left, right = dfs(node.left), dfs(node.right)
-            left = max(left, 0)
-            right = max(right, 0)
-            res[0] = max(left + right + node.val, res[0])
-            return node.val + max(left, right)
+            l = max(dfs(root.left),0)
+            r = max(dfs(root.right),0)
+            res[0] = max(res[0], l + r + root.val)
+            return root.val + max(l, r)
+        
         dfs(root)
         return res[0]
