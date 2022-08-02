@@ -11,10 +11,12 @@ class Solution(object):
         :rtype: int
         """
         
-        def dfs(node):
-            if not node:
+        def dfs(r):
+            if not r:
                 return 0
-            left, right = dfs(node.left), dfs(node.right)
-            return 1 + max(left, right)
+            if r:
+                l, r = dfs(r.left), dfs(r.right)
+                
+                return 1 + max(l, r)
         
         return dfs(root)
