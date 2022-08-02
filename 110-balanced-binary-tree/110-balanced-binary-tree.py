@@ -10,11 +10,12 @@ class Solution(object):
         :type root: TreeNode
         :rtype: bool
         """
-        def dfs(node):
-            if not node:
-                return [True,0]
-            left, right = dfs(node.left), dfs(node.right)
-            balanced = (left[0] and right[0]) and (abs(left[1] - right[1]) <= 1)
-            return [balanced,1 + max(left[1], right[1])]
+        def dfs(root):
+            if not root:
+                return [0, True]
+            l, r = dfs(root.left), dfs(root.right)
+            balanced = l[1] and r[1] and (abs(l[0] - r[0]) <= 1)
+            return [1 + max(l[0], r[0]), balanced]
         
-        return dfs(root)[0]
+        return dfs(root)[1]
+            
