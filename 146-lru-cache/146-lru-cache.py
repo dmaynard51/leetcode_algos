@@ -1,11 +1,9 @@
 class Node(object):
     def __init__(self, key, val):
         self.key = key
-        self.value = val
-        self.next = None
+        self.val = val
         self.prev = None
-        
-    
+        self.next = None
 
 class LRUCache(object):
 
@@ -13,26 +11,31 @@ class LRUCache(object):
         """
         :type capacity: int
         """
-        self.dct = defaultdict(list)
         self.head = Node(-1, -1)
         self.tail = Node(-1, -1)
+        self.capacity = capacity
         self.head.next = self.tail
         self.tail.prev = self.head
-        self.capacity = capacity
-        
+        self.dct = defaultdict(list)
 
+        
     def add(self, node):
+        
         cur = self.head.next
         node.next = cur
+        node.prev = self.head
         cur.prev = node
         self.head.next = node
-        node.prev = self.head
-        
+    
     def remove(self, node):
         prev = node.prev
         nxt = node.next
-        nxt.prev = prev
         prev.next = nxt
+        nxt.prev = prev
+        
+        
+        
+        
     
     def get(self, key):
         """
@@ -42,9 +45,9 @@ class LRUCache(object):
         if key in self.dct:
             self.remove(self.dct[key])
             self.add(self.dct[key])
-            return self.dct[key].value
-        return -1
+            return self.dct[key].val
         
+        return -1
         
 
     def put(self, key, value):
@@ -53,20 +56,18 @@ class LRUCache(object):
         :type value: int
         :rtype: None
         """
+        
         node = Node(key, value)
         
         if key in self.dct:
             self.remove(self.dct[key])
+        
         self.add(node)
         self.dct[key] = node
-        
         if len(self.dct) > self.capacity:
-            prev = self.tail.prev
-            self.remove(prev)
-            del self.dct[prev.key]
-        
-        
-        
+            last = self.tail.prev
+            self.remove(last)
+            del self.dct[last.key]
         
 
 
