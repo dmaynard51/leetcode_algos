@@ -30,7 +30,7 @@ class Solution(object):
             visit.add(p)            
             p = adj[p]
 
-            
+        #print visit
         while q not in visit:
             visit.add(q)  
             q = adj[q]
