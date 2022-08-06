@@ -5,21 +5,19 @@ class Solution(object):
         :rtype: List[int]
         """
         res = [1 for i in range(len(nums))]
-        l, r = 0, len(nums)-1
-        left, right = 1, 1
-        while l < len(nums):
+        
+        l = 0
+        left = 1
+        r = len(nums)-1
+        right = 1
+
+        for i in range(len(nums)):
             res[l] *= left
-            res[r] *= right
             left *= nums[l]
-            right *= nums[r]
             l += 1
-            r -=1
-        
+            res[r] *= right
+            right *= nums[r]
+            r -= 1
         return res
-    
-        
-        #[1,2,3,4]
-        #[1,1,1,1]
-        #1,1,2,6
-        #24,12,4,1
-        #24,12,8,6
+            
+            
