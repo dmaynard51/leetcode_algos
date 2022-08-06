@@ -10,11 +10,12 @@ class Solution(object):
         :type root: TreeNode
         :rtype: bool
         """
-        def dfs(l, node, r):
+        
+        def check(l, node, r):
             if not node:
                 return True
             if not (l < node.val and node.val < r):
                 return False
-            return dfs(l, node.left, node.val) and dfs(node.val, node.right, r)
+            return check(l, node.left, node.val) and check(node.val, node.right, r)
         
-        return dfs(-float('inf'), root, float('inf'))
+        return check(-float('inf'), root, float('inf'))
