@@ -6,16 +6,19 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         res = []
-        
-        def dfs(i, sm, cur):
+        #
+        def dfs(i, path, sm):
             if sm == target:
-                res.append(cur[:])
+                res.append(path[:])
                 return
             if i >= len(candidates) or sm > target:
                 return
-            cur.append(candidates[i])
-            dfs(i, sm + candidates[i], cur)
-            cur.pop()
-            dfs(i+1, sm, cur)
-        dfs(0, 0, [])
+            path.append(candidates[i])
+            dfs(i, path, sm + candidates[i])
+            #print path
+            path.pop()
+            dfs(i+1, path, sm)
+            return
+        
+        dfs(0, [], 0)
         return res
