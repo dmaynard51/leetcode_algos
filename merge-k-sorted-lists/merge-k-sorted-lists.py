@@ -9,36 +9,35 @@ class Solution(object):
         :type lists: List[ListNode]
         :rtype: ListNode
         """
-        
-        if len(lists) == 0:
+        if not lists:
             return None
         if len(lists) == 1:
-            return lists[-1]
+            return lists[0]
         
-        def merge(l, r):
-            dummy = ListNode(-1)
-            dummy2 = dummy
+        def merge(n1, n2):
+            dummy = node = ListNode(-1)
             
-            while l and r:
-                if l.val < r.val:
-                    dummy.next = l
-                    l = l.next
+            while n1 and n2:
+                if n1.val < n2.val:
+                    dummy.next = n1
+                    n1 = n1.next
                 else:
-                    dummy.next = r
-                    r = r.next
+                    dummy.next = n2
+                    n2 = n2.next
                 dummy = dummy.next
-                
-            if l:
-                dummy.next = l
             
-            if r:
-                dummy.next = r
-                
+            if n1:
+                dummy.next = n1
+                dummy = dummy.next
+            if n2:
+                dummy.next = n2
+                dummy = dummy.next
             
-            return dummy2.next
+            return node.next
         
         m = len(lists)//2
-        left, right = lists[:m], lists[m:]
+        l, r = lists[:m], lists[m:]
         
-        l, r = self.mergeKLists(left), self.mergeKLists(right)
-        return merge(l, r)
+        left, right = self.mergeKLists(l), self.mergeKLists(r)
+        return merge(left, right)
+                    
