@@ -4,7 +4,9 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
+        
         res = []
+        
         if len(nums) == 1:
             return [nums[:]]
         
@@ -18,4 +20,5 @@ class Solution(object):
             
             nums.append(n)
             res.extend(perms)
+        
         return res
