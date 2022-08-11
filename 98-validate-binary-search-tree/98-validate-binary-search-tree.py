@@ -11,11 +11,11 @@ class Solution(object):
         :rtype: bool
         """
         
-        def check(l, node, r):
+        def dfs(l, node, r):
             if not node:
                 return True
             if not (l < node.val and node.val < r):
                 return False
-            return check(l, node.left, node.val) and check(node.val, node.right, r)
+            return dfs(l, node.left, node.val) and dfs(node.val, node.right, r)
         
-        return check(-float('inf'), root, float('inf'))
+        return dfs(-float('inf'), root, float('inf'))
