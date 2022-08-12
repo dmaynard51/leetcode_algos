@@ -13,10 +13,17 @@ class Solution(object):
         :type q: TreeNode
         :rtype: TreeNode
         """
-        while root:
-            if root.val < p.val and root.val < q.val:
-                root = root.right
-            elif root.val > p.val and root.val > q.val:
-                root = root.left
-            else:
+        
+        def dfs(p,root, q):
+            if root:
+                #print p, root.val, q
+                if p.val < root.val and root.val < q.val:
+                    #print root.val
+                    return root
+                if root.val < p.val and root.val < q.val:
+                    return dfs(p, root.right, q)
+                if root.val > p.val and root.val > q.val:
+                    return dfs(p, root.left, q)
                 return root
+        
+        return dfs(p,root, q)
