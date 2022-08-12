@@ -4,20 +4,19 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        self.res = []
+        res = []
+        
         nums.sort()
+        
         def dfs(i, path):
-            if i == len(nums):
-                self.res.append(path[:])
+            if i >= len(nums):
+                res.append(path[:])
                 return
-            path.append(nums[i])
-            dfs(i+1, path)
-            path.pop()
+            
+            dfs(i+1, path + [nums[i]])
             while i + 1 < len(nums) and nums[i] == nums[i+1]:
                 i+=1
+            
             dfs(i+1, path)
-            
-            
-            
         dfs(0, [])
-        return self.res
+        return res
