@@ -5,10 +5,9 @@ class Solution(object):
         :rtype: int
         """
         dp = [1 for i in range(len(nums))]
-        res = 1
-        for i in range(1, len(dp)):
+        
+        for i in range(len(nums)):
             for j in range(0, i):
-                if nums[j] < nums[i]:
+                if nums[i] > nums[j]:
                     dp[i] = max(dp[i], dp[j] + 1)
-                    res = max(dp[i], res)
-        return res
+        return max(dp)
