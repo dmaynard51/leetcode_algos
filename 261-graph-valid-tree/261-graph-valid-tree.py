@@ -5,22 +5,24 @@ class Solution(object):
         :type edges: List[List[int]]
         :rtype: bool
         """
+        visit = set()
         
         adj = defaultdict(list)
         
-        for a, b in edges:
+        for a,b in edges:
             adj[a].append(b)
             adj[b].append(a)
-        visit = set()
-        def dfs(i, prev):
-            if i in visit:
+        
+        
+        def dfs(node, prev):
+            if node in visit:
                 return False
-            visit.add(i)
+            visit.add(node)
             
-            for nei in adj[i]:
+            for nei in adj[node]:
                 if nei == prev:
                     continue
-                elif not dfs(nei, i):
+                elif not dfs(nei, node):
                     return False
             return True
         
