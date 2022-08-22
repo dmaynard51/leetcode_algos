@@ -6,11 +6,13 @@ class Solution(object):
         :rtype: bool
         """
         adj = defaultdict(list)
-        
-        for src, dst in prerequisites:
-            adj[src].append(dst)
         visit = set()
         cycle = set()
+        
+        for src, nei in prerequisites:
+            adj[src].append(nei)
+            
+        
         def dfs(node):
             if node in cycle:
                 return False
@@ -22,14 +24,11 @@ class Solution(object):
             for nei in adj[node]:
                 if not dfs(nei):
                     return False
-            
-            visit.add(node)
             cycle.remove(node)
+            visit.add(node)
             return True
         
         for i in range(numCourses):
             if not dfs(i):
                 return False
-        
-        if len(visit) == numCourses:
-            return True
+        return True
