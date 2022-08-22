@@ -5,6 +5,7 @@ class Solution(object):
         :type edges: List[List[int]]
         :rtype: bool
         """
+        
         visit = set()
         
         adj = defaultdict(list)
@@ -12,7 +13,6 @@ class Solution(object):
         for a,b in edges:
             adj[a].append(b)
             adj[b].append(a)
-        
         
         def dfs(node, prev):
             if node in visit:
@@ -22,7 +22,7 @@ class Solution(object):
             for nei in adj[node]:
                 if nei == prev:
                     continue
-                elif not dfs(nei, node):
+                if not dfs(nei, node):
                     return False
             return True
         
