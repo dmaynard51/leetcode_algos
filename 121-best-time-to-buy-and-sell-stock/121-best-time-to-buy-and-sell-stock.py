@@ -4,12 +4,9 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
-        
-
-        buy = float('inf')
-        sell = -float('inf')
+        res = 0
+        buy, sell = float('inf'), -float('inf')
         for i in range(len(prices)):
             buy = min(buy, prices[i])
-            sell = max(sell, prices[i]-buy)
-            #res = max(res,maxPrices- minPrices)
+            sell = max(sell, prices[i]- buy)
         return sell
