@@ -5,31 +5,23 @@ class Solution(object):
         :type edges: List[List[int]]
         :rtype: int
         """
-        visit = set()
-        
+        res = 0
         adj = defaultdict(list)
-        
-        for a, b in edges:
-            adj[a].append(b)
-            adj[b].append(a)
-        
-        
+        visit = set()
+        for src, nei in edges:
+            adj[src].append(nei)
+            adj[nei].append(src)
         
         def dfs(node):
             if node in visit:
                 return 0
-            
             visit.add(node)
             
             for nei in adj[node]:
                 dfs(nei)
             
-            
             return 1
-        
-        res = 0
         
         for i in range(n):
             res += dfs(i)
         return res
-            
