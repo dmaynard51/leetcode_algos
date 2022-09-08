@@ -5,6 +5,7 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
+        
         l = 0
         r = len(nums)
         
