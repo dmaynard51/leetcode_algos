@@ -5,14 +5,14 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        
-        if len(s) != len(t):
-            return False
         ss = collections.Counter(s)
         tt = collections.Counter(t)
-        
-        for key, val in ss.items():
-            if tt[key] != val:
+        res = len(tt)
+        for i in range(len(s)):
+            if not tt[s[i]] or tt[s[i]] <= 0:
                 return False
-        return True
-        
+            tt[s[i]] -= 1
+            if tt[s[i]] == 0:
+                res -= 1
+        #print res
+        return res == 0
