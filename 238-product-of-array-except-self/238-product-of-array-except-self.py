@@ -4,20 +4,18 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        res = [1 for i in range(len(nums))]
+        lst = [1 for i in range(len(nums))]
         
-        l = 0
-        left = 1
-        r = len(nums)-1
-        right = 1
-
+        l, r = 0, len(nums)-1
+        leftSide, rightSide = 1, 1
         for i in range(len(nums)):
-            res[l] *= left
-            left *= nums[l]
+            lst[l] *= leftSide
+            lst[r] *= rightSide
+            leftSide *= nums[l]
+            rightSide *= nums[r]
             l += 1
-            res[r] *= right
-            right *= nums[r]
-            r -= 1
-        return res
-            
-            
+            r -=1
+        return lst
+    
+        #1 1 1 1
+        #24 
