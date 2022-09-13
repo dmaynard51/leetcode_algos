@@ -10,11 +10,9 @@ class Solution(object):
         :type root: TreeNode
         :rtype: TreeNode
         """
-        def dfs(r):
-            if r:
-                r.left, r.right = r.right, r.left
-                dfs(r.left)
-                dfs(r.right)
-            
-                return r
+        
+        def dfs(node):
+            if node:
+                node.left, node.right = dfs(node.right), dfs(node.left)
+                return node
         return dfs(root)
