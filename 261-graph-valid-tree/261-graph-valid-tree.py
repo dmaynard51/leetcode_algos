@@ -6,14 +6,15 @@ class Solution(object):
         :rtype: bool
         """
         
+        
         visit = set()
         
         adj = defaultdict(list)
         
-        for a,b in edges:
-            adj[a].append(b)
-            adj[b].append(a)
-        
+        for src, nei in edges:
+            adj[src].append(nei)
+            adj[nei].append(src)
+            
         def dfs(node, prev):
             if node in visit:
                 return False
@@ -24,6 +25,9 @@ class Solution(object):
                     continue
                 if not dfs(nei, node):
                     return False
+            
             return True
+        
+        
         
         return dfs(0, -1) and len(visit) == n
