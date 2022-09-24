@@ -11,18 +11,18 @@ class Solution(object):
         :type targetSum: int
         :rtype: List[List[int]]
         """
-        
         res = []
-        def dfs(node, path, sm):
+        
+        def dfs(node, target, path):
             if node:
                 path.append(node.val)
-                if node.val == sm and not node.left and not node.right:
+                if node.val == target and not node.left and not node.right:
                     res.append(path[:])
-                dfs(node.left, path, sm - node.val)
-                dfs(node.right, path, sm - node.val)
+                dfs(node.left, target- node.val, path)
+                dfs(node.right, target- node.val, path)
                 if path:
                     path.pop()
         
-        dfs(root, [], targetSum)
-
+        dfs(root, targetSum, [])
         return res
+                
