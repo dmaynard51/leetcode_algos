@@ -6,15 +6,8 @@ class Solution(object):
         """
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
-                original = matrix[i][j]
-                jj = j
-                ii = i
-            
-                while ii < len(matrix) and jj < len(matrix[0]):
-                    #print matrix[ii][jj], original
-                    if matrix[ii][jj] != original:
+                if i > 0 and j > 0:
+                    if matrix[i][j] != matrix[i-1][j-1]:
                         return False
-                    ii+= 1
-                    jj+= 1
 
         return True
