@@ -7,8 +7,6 @@ class Solution(object):
         """
         l = 0
         r= len(nums)-1
-        if len(nums) == 1 and nums[-1] == target:
-            return 0
         
         while l <= r:
             m = l + (r-l)//2
