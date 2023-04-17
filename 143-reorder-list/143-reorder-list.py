@@ -32,8 +32,8 @@ class Solution(object):
         l2 = prev
         
         while l2.next:
-            l1.next, l1 = l2, l1.next
-            l2.next, l2 = l1,l2.next
+            l1.next,l1 = l2,l1.next
+            l2.next,l2 = l1,l2.next
             
         
             
