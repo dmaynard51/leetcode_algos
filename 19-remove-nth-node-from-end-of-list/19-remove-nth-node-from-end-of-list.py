@@ -17,16 +17,15 @@ class Solution(object):
         count = 0
         
         while head:
-            count+=1 
             head = head.next
+            count += 1
         
-        count = count - n
-        # dummy1 = dummy1.next
-        while count != 0:
+        n = count - n
+        
+        while n != 0:
             dummy1 = dummy1.next
-            count -= 1
-            
+            n -= 1
         
         dummy1.next = dummy1.next.next
-        
         return dummy2.next
+        
